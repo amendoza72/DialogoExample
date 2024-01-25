@@ -1,11 +1,13 @@
 package com.example.dialogoexample
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import java.util.Calendar
@@ -74,5 +76,23 @@ class MainActivity : AppCompatActivity() {
             calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH))
 
         fechaDialog.show()
+    }
+
+
+    fun onTimePickerDialogButton(view: View){
+
+        val timePickerListener= object:TimePickerDialog.OnTimeSetListener{
+
+            override fun onTimeSet(p0: TimePicker?, hora: Int, minutos: Int) {
+                val mensaje: String= hora.toString() + ":" + minutos.toString()
+                Toast.makeText(applicationContext, mensaje, Toast.LENGTH_LONG).show()
+            }
+
+        }
+
+
+        var horaDialog = TimePickerDialog(this, timePickerListener, calendario.get(Calendar.HOUR), calendario.get(Calendar.MINUTE), true)
+
+        horaDialog.show()
     }
 }

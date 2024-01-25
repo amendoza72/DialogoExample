@@ -22,9 +22,16 @@
         android:text="Ver Alert Dialog" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonDatePickerDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onDatePickerDialogButton"
         android:text="Ver DatePickerDialog" />
+
+    <Button
+        android:id="@+id/buttonTimePickerDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onTimePickerDialogButton"
+        android:text="Ver TimePickerDialog" />
 </LinearLayout>
