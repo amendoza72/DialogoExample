@@ -9,15 +9,37 @@ import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
     var calendario = Calendar.getInstance()
+    var context = this
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                var builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(context);
+                builder.setTitle("Atención!!");
+                builder.setMessage("De verdad quieres salir?");
+
+
+                builder.setPositiveButton("Si"){view, p1 ->
+                    finish();
+                }
+
+                builder.setNegativeButton("No"){view, p1 ->
+                    view.dismiss();
+                }
+
+                builder.show();
+            }
+        })
     }
 
     fun onButtonToast(view: View) {
@@ -94,5 +116,17 @@ class MainActivity : AppCompatActivity() {
         var horaDialog = TimePickerDialog(this, timePickerListener, calendario.get(Calendar.HOUR), calendario.get(Calendar.MINUTE), true)
 
         horaDialog.show()
+    }
+
+    fun onCustomDialogButton(view: View){
+        var miCustomDialog = CustomDialog();
+        miCustomDialog.mainActivity = this;
+        miCustomDialog.show(supportFragmentManager, "CustomEtiqueta");
+    }
+
+
+    fun actualizarUsuarioPassword(usuario: String, password: String){
+        val mensaje: String= "$usuario - $password"
+        Toast.makeText(applicationContext, mensaje, Toast.LENGTH_LONG).show()
     }
 }
